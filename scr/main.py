@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
         #Distibucion
         scatte = viz.scatter_popularidad()
-        plt.show()
+        scatte.show()
 
         #Mapa correlacion
         proc = ProcesadorEDA(df_limpio)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
         #barras horizontales
         top_votos = viz.barrash_top10_votos()
-        plt.show()
+        top_votos.show()
 
         # grafico lineal
         evo_fechas = viz.lineal_evolucion_anual()

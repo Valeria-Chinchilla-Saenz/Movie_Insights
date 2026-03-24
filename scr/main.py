@@ -10,6 +10,10 @@ if __name__ == '__main__':
     df = cargador.cargar_csv()
 
     if df is not None:
+        #Exploracion de datos
+        procesador_inicial = ProcesadorEDA(df)
+        procesador_inicial.exploracion()
+
         #Instancia del limpiador de variables
         limpiador = LimpiadorColumnas(df)
         df_reducido = limpiador.eliminar_columnas()

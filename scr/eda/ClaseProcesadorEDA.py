@@ -12,7 +12,7 @@ class CargadorDatos:
         self.nulos = 0.0 #cuenta si hay celdas vacias
 
     def cargar_csv(self):
-        try:
+        try: #maneja el código de manera controlada evitando que el programa caiga
             self.df = pd.read_csv(self.archivo, sep = ',')
             self.numfilas = len(self.df)
 
@@ -81,10 +81,10 @@ class ProcesadorEDA:
         self.df['release_date'] = pd.to_datetime(self.df['release_date'], errors='coerce')
         self.df['popularity'] = pd.to_numeric(self.df['popularity'], errors='coerce')
 
-        #Normalización de genero e idioma
+        #Normalización de idioma
         if 'original_language' in self.df.columns:
             self.df['original_language'] = self.df['original_language'].str.strip().str.upper() #elimina los espacios en blanco y lo pasa a mayuscula
-            self.df['original_language'] = self.df['original_language'].astype('category')
+            self.df['original_language'] = self.df['original_language'].astype('category') #divide los idiomas y los anota de manera de que no sean tan pesados
 
         if 'genre_ids' in self.df.columns:
             #elimacion de los parentesis cuadrados

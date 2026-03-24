@@ -223,7 +223,7 @@ class Visualizador:
 
         barras = ax.barh(y_labels, top_por_ano['popularity'], color='skyblue', edgecolor='black')
 
-        ax.set_title('La Pelicula Mas Popular por Año de Estreno', fontsize=16, pad=20)
+        ax.set_title('La Pelicula Mas Popular por Año', fontsize=16, pad=20)
         ax.set_xlabel('Nivel de Popularidad', fontsize=12)
         ax.set_ylabel('Año y Titulo', fontsize=12)
 

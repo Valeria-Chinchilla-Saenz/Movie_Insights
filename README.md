@@ -40,3 +40,22 @@ La clase ProcesadorEDA contiene los siguientes métodos:
 - El método resumen estadistico muestra las medidas de las variables númericas.
 
 - El método matriz de correlación genera un mapa que mide que tan fuerte es la relación entre las variables númericas (sin tomar encuenta la varible 'id').
+
+
+### Explicación de ClaseVisualizador.py
+
+La clase Visualizador es la encargada de transformar el set de datos procesado en representaciones gráficas.
+
+El histograma prom votos muestra cual es la cantidad de peliculas con mayor promedio de voto lo hace primero filtrando los ceros existentes en la columna 'vote_average', utilizando la variable que guarda el resultado de la acción anterior, crea el histograma que muestra los resultados. También se utiliza una línea que marca la media de la variable 'vote_average' así como un insight que resume el analisis de los resultados. 
+
+El diagrama de dispersión popularidad muestra la relación que existe entre la popularidad y el promedio de votos que tienen las peliculas. Lo primero que hace es un filtrado de ceros existentes en la columna 'vote_average' y 'popularity', utilizando la variable que guarda el resultado de la acción anterior, crea el diagrama de dispersión que mestra los resultados. 
+
+El mapa de calor muestra las correlaciones que existen entre cada columna del set de datos. Hace un ciclo de los numeros y añade los nombres reales de las columnas y dibuja la matriz.
+
+El gráfico de barras verticales estadistic muestra el analisis comparativo del promedio, minimo, maximo del resumen estadistico realizado en la clase ProcesadorEDA. 
+
+El gráfico de barras idiomas muestra la tendencia de los idiomas presentes en el set de datos.  
+
+El gráfico de lineal de la evolución anual muestra la tendencia historica de la popularidad. Lo primero que hace es utilizar una copia del set de datos, convierte a fecha y extrae el año agrupandolo por año y calcula el promedio de la propularidad, crea el gráfico líneal.
+
+El gráfico de barras horizontales de las peliculas por año muestra la película más popular y su año de lanzamiento. Lo primero que hace es realizar una copia del set de datos, limpia las fechas para obtener el año y obtener así la pelicula más popular y hace un filtro de los últimos 15 años de lanzamientos, y crea del gráfico.

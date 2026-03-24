@@ -3,7 +3,6 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
 class CargadorDatos:
     def __init__(self, archivo):
         self.archivo = archivo
@@ -80,7 +79,13 @@ class ProcesadorEDA:
         return resumen
 
     def matriz_correlacion(self):
-        matriz = self.df. select_dtypes(include = 'number').corr(method = 'pearson')
+        columnas_numericas = self.df. select_dtypes(include = 'number').corr(method = 'pearson')
+
+        if 'id' in columnas_numericas.columns:
+            columnas_numericas = columnas_numericas.drop(columns = ['id'])
+
+        #Calculo de la correlacion
+        matriz = columnas_numericas.corr(method = 'pearson')
         return matriz
 
 

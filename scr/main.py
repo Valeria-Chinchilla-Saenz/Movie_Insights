@@ -1,8 +1,9 @@
+import pandas as pd
 from eda.ClaseProcesadorEDA import CargadorDatos, LimpiadorColumnas, ProcesadorEDA
 
 if __name__ == '__main__':
     #nombre del archivo
-    nombre_archivo = "tmdb_2020_to_2025.csv"
+    nombre_archivo = "data/raw/tmdb_2020_to_2025.csv"
 
     #Instancia de la clase cargador de datos
     cargador = CargadorDatos(nombre_archivo)
@@ -21,4 +22,4 @@ if __name__ == '__main__':
         print(procesador.resumen_estadistico()) #imprime el resumen estadistico
         print(procesador.matriz_correlacion()) #imprime la matriz de correlacion
 
-        cargador.guardar_csv(df_limpio, nombre_archivo = "tmdb_movies_clean.csv")
+        cargador.guardar_csv(df_limpio, nombre_archivo = "data/processed/tmdb_movies_clean.csv")

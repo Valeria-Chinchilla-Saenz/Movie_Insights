@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-
+import plotly.express as px
 class Visualizador:
     def __init__(self, df):
         self.df = df
@@ -27,13 +27,11 @@ class Visualizador:
 # scatter,
     def scatter_popularidad(self):
 
-        filtro_ceros = self.df[self.df['vote_average'] > 0][['vote_average', 'popularity']].copy()
+        filtro_ceros = self.df[(self.df['vote_average'] > 0) & (self.df['popularity'] > 0)].copy()
 
-        fig, ax = plt.subplots(figsize=(10, 6))
-        plt.scatter(filtro_ceros['vote_average'],filtro_ceros['popularity'],  color='skyblue')
-        plt.xlabel("promedio de votos")
-        plt.ylabel("nivel de popularidad")
-        plt.title("Relacion entre la Popularidad de las Peliculas y su Promedio de Votos")
+        fig = px.scatter(filtro_ceros,x= 'vote_average',y='popularity',hover_name="title",color="vote_count",
+                         title="Relacion entre la Popularidad de las Peliculas y su Promedio de Votos",labels={'vote_average': 'Calificación', 'popularity': 'Popularidad'})
+
         return fig
 
 # heatmap
@@ -116,26 +114,16 @@ class Visualizador:
         #Ordenar el DF por vote_count y tomar las top 10
         top_10 = self.df.nlargest(10, 'vote_count')
 
-        fig, ax = plt.subplots(figsize=(12, 8))
 
-        barras = ax.barh(top_10['title'], top_10['vote_count'],
-                         color='skyblue', edgecolor='black')
+        fig = px.bar(top_10, x='vote_count', y='title', orientation='h', color='vote_count',
+                     title='Top 10 Titulos con Mayor Cantidad de Votos',text="vote_count", color_continuous_scale='Blues' )
 
-        # La barra numero 1 sale arriba con esto
-        ax.invert_yaxis()
 
-        ax.set_title('Top 10 Títulos con Mayor Cantidad de Votos')
-        ax.set_xlabel('Cantidad de Votos')
-        ax.set_ylabel('Título de la Película')
+        fig.update_layout(yaxis={'categoryorder': 'total ascending'})  # Ordena de mayor a menor
 
-        # Añadir el número exacto al final de cada barra
-        for i, barra in enumerate(barras):
-            votos = top_10['vote_count'].iloc[i]
-            ax.text(votos + (votos * 0.01), i, f'{int(votos)}',
-                    va='center', fontsize=10, fontweight='bold')
-
-        plt.tight_layout()
         return fig
+
+
 # Lineal
     def lineal_evolucion_anual(self):
         df_temp = self.df.copy()

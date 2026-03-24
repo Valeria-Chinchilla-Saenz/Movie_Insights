@@ -3,6 +3,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 class CargadorDatos:
     def __init__(self, archivo):
         self.archivo = archivo
@@ -51,11 +52,19 @@ class ProcesadorEDA:
     def __init__(self, dataframe):
         self.df = dataframe.copy() #se trabaja desde una copia, asi un error no dañara el original
 
-    def exploracion(self):
+    def info_basica(self):
         print(f"Registros totales: {self.df.shape[0]}")
-        print(f"Columnas detectadas: {self.df.shape[1]}")
+        print(f"\nColumnas detectadas: {self.df.shape[1]}")
+        print(f"\nDimensiones: {self.df.shape[0]} filas x {self.df.shape[1]} columnas")
+
+    def tip_datos(self):
+        print("\nTipos de datos de las columna")
         print(self.df.dtypes) # muestra tipos de datos de las columnas
+    def con_nulos(self):
+        print("\nConteo de los nulos")
         print(self.df.isnull().sum()) #muestra un conteo de los nulos
+    def muestra(self):
+        print("\nPrimeros 20 registros del dataset")
         print(self.df.head(20)) #muestra los primeros 20 registros
 
     def limpieza_datos(self):

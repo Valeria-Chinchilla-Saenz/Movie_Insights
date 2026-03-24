@@ -25,7 +25,7 @@ class Visualizador:
         ax.text(0.1, 0.9,
                 "Insight: La distribución es normal pero tiene un pico cerca del 6.2.\n"
                     "y esto lo que indica es que el catalogo tiene calidad balanceada,\n",
-                transform=ax.transAxes, fontsize=6, verticalalignment='top',
+                transform=ax.transAxes, fontsize=8, verticalalignment='top',
                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.5))
         return fig
 
@@ -38,7 +38,7 @@ class Visualizador:
             "<b>Relacion entre la Popularidad de las Peliculas y su Promedio de Votos</b><br>"
             
             "<i>¿Catidad de votos es igual a Popularidad?</i><br>"
-            "<i>Notamos que las notas altas (8+) no garantizan la mayor popularidad masiva.</i>"
+            "<i>Notamos que las Calificaciones altas no garantizan la mayor popularidad </i>"
         )
 
         fig = px.scatter(filtro_ceros,x= 'vote_average',y='popularity',hover_name="title",color="vote_count",

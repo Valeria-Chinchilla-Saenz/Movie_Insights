@@ -51,6 +51,13 @@ class ProcesadorEDA:
     def __init__(self, dataframe):
         self.df = dataframe.copy() #se trabaja desde una copia, asi un error no dañara el original
 
+    def exploracion(self):
+        print(f"Registros totales: {self.df.shape[0]}")
+        print(f"Columnas detectadas: {self.df.shape[1]}")
+        print(self.df.dtypes) # muestra tipos de datos de las columnas
+        print(self.df.isnull().sum()) #muestra un conteo de los nulos
+        print(self.df.head(20)) #muestra los primeros 20 registros
+
     def limpieza_datos(self):
 
         # Manejo de nulos

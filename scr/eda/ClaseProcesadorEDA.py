@@ -53,10 +53,13 @@ class ProcesadorEDA:
 
     def limpieza_datos(self):
 
-        #Manejo de nulos
-        self.df.dropna(subset = ['title', 'release_date'], inplace = True)
-        self.df['vote_average'] = self.df['vote_average'].fillna(0.0) # Si no hay nota, asume 0
-        self.df['vote_count'] = self.df['vote_count'].fillna(0)
+        # Manejo de nulos
+        #self.df.dropna(subset=['title', 'release_date'], inplace=True)
+        #self.df['vote_average'] = self.df['vote_average'].fillna(0.0) # Si no hay nota, asume 0
+        #self.df['vote_count'] = self.df['vote_count'].fillna(0)
+
+        #Imputacion de nulos
+        self.df['overview'] = self.df['overview'].fillna('No posee descripcion')
 
         #Formato de datos correcto
         self.df['release_date'] = pd.to_datetime(self.df['release_date'], errors='coerce')

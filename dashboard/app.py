@@ -28,7 +28,7 @@ if df is not None:
     st.title("Movie Insights: Análisis 2020-2025")
     st.markdown("---")# linea que hace unan divicion visual
 
-    # 2. Métricas principales
+    # Metricas principales
     col1, col2, col3 = st.columns(3) # son tres columnas para mostrar las metricas
     # aqui se le dice que mosotrar en cada columna
     with col1:
@@ -40,7 +40,7 @@ if df is not None:
 
     st.markdown("---")
 
-    # 3. Gráficos Interactivos
+    # Grficos interactivos
     col_iz1, col_de2 = st.columns(2)
 
     with col_iz1:

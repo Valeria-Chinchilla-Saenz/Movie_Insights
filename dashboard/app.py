@@ -10,7 +10,7 @@ import pandas as pd
 import plotly.express as px
 import os
 
-# Configuracion de la página
+# Configuracion de la pagina
 st.set_page_config(page_title="Movie Insights Dashboard", layout="wide")
 
 #Cargar los datos limpios
@@ -76,13 +76,17 @@ if df is not None:
 
     with col_de4:
         resumen = proc.resumen_estadistico()
-        st.subheader("Grafico de barras verticales que muestran el analisis comparatorio del promedio, minimo y maximo del resumen estadistico realizado en la ClaseProcesadorEDA")
+        st.subheader("Grafico de barras verticales que muestran el analisis comparatorio resumen estadistico realizado en la ClaseProcesadorEDA")
         resumen = proc.resumen_estadistico()
-        col_selecci = st.selectbox("Selecciona la metrica a analizar:", resumen.columns.tolist())
 
-        # Creamos un grafico de barras interactivo con Plotly para las estadísticas
-        fig_est = px.bar(resumen, x=resumen.index, y=col_selecci,
-                         title=f"Analisis de {col_selecci}", color=col_selecci)
+        filas_uso = ['mean', 'min', 'max']
+        resumen_filtrado = resumen.loc[filas_uso]
+
+        opciones_menu = resumen_filtrado.columns.tolist()
+        col_selecci = st.selectbox("Selecciona la metrica a analizar:",opciones_menu,key = "selector")
+
+        fig_est = px.bar(resumen_filtrado, x=resumen_filtrado.index, y=col_selecci, title=f"Analisis de el  Minimo, Promedio y Maximo de: {col_selecci}", labels={'index': 'Estadisticas', col_selecci: 'Valores'}, color=resumen_filtrado.index,
+            text_auto='.2f',color_discrete_map={'mean': '#636EFA', 'min': '#EF553B', 'max': '#00CC96'} )
         st.plotly_chart(fig_est, use_container_width=True)
 
     st.markdown("---")
@@ -118,7 +122,7 @@ if df is not None:
         st.plotly_chart(fig_lineal, use_container_width=True)
 
     with col_de8:
-        st.subheader("Grafico de barras horizontales que muestra la pelicula mas popular y su año ")
+        st.subheader("Grafico de barras verticales que muestra la pelicula mas popular y su año ")
         df['release_date'] = pd.to_datetime(df['release_date'])
         df['release_year'] = df['release_date'].dt.year
 

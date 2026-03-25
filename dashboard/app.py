@@ -95,16 +95,18 @@ if df is not None:
         st.plotly_chart(fig_top, use_container_width=True)
 
     with col_de6:
-        st.subheader("Grafico de pastel que muestra la tendencia en los idiomas presentes en el dataset")
+        st.subheader("Grafico de barras verticales que muestra la tendencia en los idiomas presentes en el dataset")
         idiomas = df['original_language'].value_counts().head(10)
         fig_pie = px.pie(values=idiomas.values, names=idiomas.index,
                          title="Distribucion del catalogo de las paliculas por Idioma Original, el Top 10")
         st.plotly_chart(fig_pie, use_container_width=True)
-
     st.markdown("---")
 
     col_iz7, col_de8 = st.columns(2)
     with col_iz7:
+        df['release_date'] = pd.to_datetime(df['release_date'])
+        df['release_year'] = df['release_date'].dt.year
+
         st.subheader("Grafico lineal que muestra la tendencia historica de la popularidad")
         # Agrupa por año y calcula el promedio de la popularidad
         df_evolucion = df.groupby('release_year')['popularity'].mean().reset_index()
@@ -116,13 +118,15 @@ if df is not None:
         st.plotly_chart(fig_lineal, use_container_width=True)
 
     with col_de8:
+        st.subheader("Grafico de barras horizontales que muestra la pelicula mas popular y su año ")
         df['release_date'] = pd.to_datetime(df['release_date'])
         df['release_year'] = df['release_date'].dt.year
-        st.subheader("Grafico de barras horizontales que muestra la pelicula mas popular y su año ")
 
-        df_evolucion = df.groupby('release_year')['popularity'].mean().reset_index()
+        #Con esto se tiene la pelicula top por año
+        idx_max = df.groupby('release_year')['popularity'].idxmax()
+        df_top_anual = df.loc[idx_max].sort_values('release_year')
 
-        fig_anual = px.bar(df_evolucion, x='release_year', y='popularity',hover_data=['title'],text='title',title="La Pelicula Mas Popular por Año",
+        fig_anual = px.bar(df_top_anual, x='release_year', y='popularity',hover_data=['title'],text='title',title="La Pelicula Mas Popular por Año",
                            color='popularity',color_continuous_scale='Viridis')
 
         fig_anual.update_traces(textposition='outside')
